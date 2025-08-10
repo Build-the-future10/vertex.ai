@@ -8,7 +8,6 @@ export default function SiteLayout() {
 
   const navItems = isAuthenticated
     ? [
-        { to: "/", label: "Home" },
         { to: "/main", label: "Main" },
         { to: "/notetaker", label: "AI Notetaker + Quiz" },
         { to: "/study-zone", label: "Study Zone" },
@@ -28,7 +27,7 @@ export default function SiteLayout() {
       <header className="sticky top-0 z-40">
         <nav className="neu-surface/blur border-b backdrop-blur supports-[backdrop-filter]:bg-background/70">
           <div className="container mx-auto flex items-center justify-between py-3">
-            <Link to="/" className="flex items-center gap-2 hover-scale">
+            <Link to={isAuthenticated ? "/main" : "/"} className="flex items-center gap-2 hover-scale">
               <span className="text-xl font-semibold tracking-wide sketch-underline">Vertex</span>
             </Link>
 

@@ -22,7 +22,7 @@ export default function ThemeToggle() {
   return (
     <button
       aria-label="Toggle theme"
-      className="neu-toggle group"
+      className="neu-toggle group transition-transform duration-200 hover:-rotate-3"
       onClick={() => setDark((v) => !v)}
     >
       <Sun className={`h-4 w-4 transition-all duration-300 group-hover:rotate-6 ${dark ? 'opacity-40 scale-90' : 'opacity-100 scale-100'}`} />

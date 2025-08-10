@@ -1,8 +1,16 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Home() {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/main", { replace: true });
+  }, [isAuthenticated, navigate]);
   return (
     <>
       <Helmet>
@@ -30,23 +38,12 @@ export default function Home() {
         <img src="/lovable-uploads/4ad3dbf0-06b3-4925-92ca-5ba6b3c5173a.png" alt="Leaves illustration" loading="lazy" className="absolute -right-6 -bottom-8 w-48 md:w-72 opacity-70 pointer-events-none" />
       </motion.section>
 
-      <div className="grid md:grid-cols-3 gap-6 mt-10">
-        {[
-          { title: "Study Zone", to: "/study-zone" },
-          { title: "AI Chatbot", to: "/chatbot" },
-          { title: "Note taker + Flashcards + Quiz", to: "/notetaker" },
-          { title: "AI Calendar", to: "/planner" },
-          { title: "Study Planner", to: "/planner" },
-          { title: "Image Answer", to: "/image-answer" },
-        ].map((card) => (
-          <Link key={card.title} to={card.to} className="group">
-            <motion.div whileHover={{ y: -4 }} className="neu-card h-full p-6">
-              <h3 className="text-xl font-medium mb-2 group-hover:translate-x-1 transition-transform">{card.title}</h3>
-              <p className="opacity-70 text-sm">Explore {card.title.toLowerCase()} →</p>
-            </motion.div>
-          </Link>
-        ))}
-      </div>
+      <section className="mt-10 max-w-3xl">
+        <p className="opacity-90 text-base md:text-lg">
+          Vertex unifies planning, note-taking, flashcards, quizzes, AI chat, and more into one elegant workspace. Designed for focus and flow, it’s fast, minimal, and ready for your study routine.
+        </p>
+        <blockquote className="mt-6 border-l-4 pl-4 italic opacity-90">“The only tool you'll ever need.”</blockquote>
+      </section>
     </>
   );
 }
