@@ -1,18 +1,28 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
-
-const navItems = [
-  { to: "/", label: "Home" },
-  { to: "/main", label: "Main" },
-  { to: "/notetaker", label: "AI Notetaker + Quiz" },
-  { to: "/study-zone", label: "Study Zone" },
-  { to: "/chatbot", label: "AI Chatbot" },
-  { to: "/planner", label: "Study Planner" },
-  { to: "/image-answer", label: "Image Answer" },
-  { to: "/about", label: "About" },
-];
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function SiteLayout() {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const navItems = isAuthenticated
+    ? [
+        { to: "/", label: "Home" },
+        { to: "/main", label: "Main" },
+        { to: "/notetaker", label: "AI Notetaker + Quiz" },
+        { to: "/study-zone", label: "Study Zone" },
+        { to: "/chatbot", label: "AI Chatbot" },
+        { to: "/planner", label: "Study Planner" },
+        { to: "/image-answer", label: "Image Answer" },
+        { to: "/paper-maker", label: "IB/IGCSE Paper Maker" },
+        { to: "/about", label: "About" },
+      ]
+    : [
+        { to: "/", label: "Home" },
+        { to: "/about", label: "About" },
+      ];
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <header className="sticky top-0 z-40">
@@ -22,9 +32,9 @@ export default function SiteLayout() {
               <span className="text-xl font-semibold tracking-wide sketch-underline">Vertex</span>
             </Link>
 
-            <ul className="hidden md:flex items-center gap-6">
+            <ul className="hidden md:flex items-center gap-6 overflow-x-auto">
               {navItems.map((item) => (
-                <li key={item.to}>
+                <li key={item.to} className="shrink-0">
                   <NavLink
                     to={item.to}
                     end
@@ -40,8 +50,19 @@ export default function SiteLayout() {
             </ul>
 
             <div className="flex items-center gap-3">
-              <NavLink to="/login" className="hidden md:inline-block neu-button">Log in</NavLink>
-              <NavLink to="/signup" className="hidden md:inline-block neu-button">Sign up</NavLink>
+              {!isAuthenticated ? (
+                <>
+                  <NavLink to="/login" className="hidden md:inline-block neu-button">Log in</NavLink>
+                  <NavLink to="/signup" className="hidden md:inline-block neu-button">Sign up</NavLink>
+                </>
+              ) : (
+                <button
+                  onClick={() => { logout(); navigate("/"); }}
+                  className="hidden md:inline-block neu-button"
+                >
+                  Log out
+                </button>
+              )}
               <ThemeToggle />
             </div>
           </div>

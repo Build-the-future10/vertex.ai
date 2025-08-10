@@ -10,8 +10,8 @@ export default function StudyPlanner() {
         <link rel="canonical" href={typeof window!== 'undefined' ? window.location.href : '/planner'} />
       </Helmet>
       <div className="grid md:grid-cols-2 gap-6">
-        <NeumorphicCard className="p-6 h-72">Calendar placeholder</NeumorphicCard>
-        <NeumorphicCard className="p-6 h-72">Upcoming sessions placeholder</NeumorphicCard>
+        <NeumorphicCard className="p-6 h-72" title="Calendar" info="Plan sessions and track deadlines.">Calendar placeholder</NeumorphicCard>
+        <NeumorphicCard className="p-6 h-72" title="Upcoming" info="Your next tasks at a glance.">Upcoming sessions placeholder</NeumorphicCard>
       </div>
     </>
   );
