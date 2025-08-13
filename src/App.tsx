@@ -17,6 +17,7 @@ import About from "@/pages/About";
 import NotFound from "./pages/NotFound";
 import { HelmetProvider } from "react-helmet-async";
 import PaperMaker from "@/pages/PaperMaker";
+import UserSettings from "@/pages/UserSettings";
 import { AuthProvider } from "@/contexts/AuthContext";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
                 <Route path="image-answer" element={<ImageAnswer />} />
                 <Route path="paper-maker" element={<PaperMaker />} />
                 <Route path="about" element={<About />} />
+                <Route path="settings" element={<UserSettings />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
