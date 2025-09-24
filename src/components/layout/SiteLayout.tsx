@@ -12,8 +12,8 @@ export default function SiteLayout() {
   }, [menuOpen]);
 
   const navLinks = [
-    { to: '/home', label: 'Home' },        // ✅ Home Tab
-    { to: '/features', label: 'Features' }, // ✅ Features Tab
+    { to: '/home', label: 'Home' },       
+    { to: '/features', label: 'Features' }, 
     { to: '/about', label: 'About' },
     { to: '/pricing', label: 'Pricing' },
     { to: '/login', label: 'Login' },
